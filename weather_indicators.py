@@ -1,3 +1,7 @@
+from dataclasses import dataclass
+
+
+@dataclass
 class WeatherIndicators:
     def __init__(
         self,
