@@ -15,7 +15,7 @@ single model, calculates weather indicators, and prints a readable report.
 
 ## Requirements
 
-- Python `3.14` or newer.
+- Python `3.15` or newer.
 - [uv](https://docs.astral.sh/uv/).
 
 ## Running the Application
