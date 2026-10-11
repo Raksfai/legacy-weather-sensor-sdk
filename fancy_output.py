@@ -7,7 +7,8 @@ from weather_indicators import WeatherIndicators
 
 def make_fancy_output(data: WeatherIndicators) -> str:
     output = f"Weather Report for {data.city}:\n"
-    output += f"Temperature: {data.temperature_celsius:.2f}°C ({convert_celsius_to_fahrenheit(data):.2f}°F)\n"
+    output += f"Temperature: {data.temperature_celsius:.2f}°C"
+    output += f" ({convert_celsius_to_fahrenheit(data):.2f}°F)\n"
     output += f"Humidity: {data.humidity_percent:.2f}%\n"
     output += f"Wind Speed: {data.wind_speed:.2f} m/s\n"
     if data.wind_direction is not None:

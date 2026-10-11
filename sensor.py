@@ -38,7 +38,7 @@ _MOCK_DATA = [
 ]
 
 
-def get_raw_data():
+def get_raw_data() -> str | dict | list:
     return random.choice(_MOCK_DATA)
 
 

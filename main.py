@@ -9,13 +9,15 @@ from fancy_output import make_fancy_output
 SEPARATOR_LENGTH = 20
 
 raw_data = sensor.get_raw_data()
-data = normalize_raw_data(raw_data)
 
-print("First task")
+print("\nFirst task")
 
 print("=" * SEPARATOR_LENGTH)
 print(identify_sensor_format(raw_data))
 print("=" * SEPARATOR_LENGTH)
+
+data = normalize_raw_data(raw_data)
+
 
 print("\nSecond task")
 

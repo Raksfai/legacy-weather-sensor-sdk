@@ -9,16 +9,17 @@ from data_normalization import (
     normalize_raw_data_from_list,
     normalize_raw_data_from_string,
 )
-from weather_indicators import WeatherIndicators
 from fancy_output import make_fancy_output
+from weather_indicators import WeatherIndicators
 
-def test_normalize_raw_data_from_string():
+
+def test_normalize_raw_data_from_string() -> None:
     result = normalize_raw_data_from_string("Kyiv;+10.5C;78%;5.2m/s")
 
     assert result == WeatherIndicators("Kyiv", 10.5, 78.0, 5.2)
 
 
-def test_normalize_raw_data_from_dict():
+def test_normalize_raw_data_from_dict() -> None:
     raw_data = {
         "location": "Kharkiv",
         "data": {
@@ -32,7 +33,7 @@ def test_normalize_raw_data_from_dict():
     assert result == WeatherIndicators("Kharkiv", 5.1, 85.0, 4.5, "NW")
 
 
-def test_normalize_raw_data_from_list():
+def test_normalize_raw_data_from_list() -> None:
     raw_data = [
         ("city", "Zaporizhzhia"),
         ("temp_celsius", 9.3),
@@ -45,29 +46,34 @@ def test_normalize_raw_data_from_list():
 
 
 @pytest.mark.parametrize(
-    "weather_data, expected",
+    ("weather_data", "expected"),
     [
         (WeatherIndicators("Kyiv", 0, 0, 0), 32.0),
         (WeatherIndicators("Lviv", 100, 0, 0), 212.0),
         (WeatherIndicators("Odesa", -40, 0, 0), -40.0),
     ],
 )
-def test_convert_celsius_to_fahrenheit(weather_data, expected):
+def test_convert_celsius_to_fahrenheit(
+    weather_data: WeatherIndicators, expected: float
+) -> None:
     assert convert_celsius_to_fahrenheit(weather_data) == expected
 
 
 @pytest.mark.parametrize(
-    "weather_data, expected",
+    ("weather_data", "expected"),
     [
         (WeatherIndicators("Kyiv", 10, 50, 5), 4.52),
         (WeatherIndicators("Lviv", 20, 70, 3), 19.29),
         (WeatherIndicators("Odesa", -5, 80, 10), -14.89),
     ],
 )
-def test_convert_temperature_to_feels_like(weather_data, expected):
+def test_convert_temperature_to_feels_like(
+    weather_data: WeatherIndicators, expected: float
+) -> None:
     assert convert_temperature_to_feels_like(weather_data) == expected
 
-def test_make_fancy_output():
+
+def test_make_fancy_output() -> None:
     data = WeatherIndicators("Kyiv", 10, 50, 5, "NE")
     output = make_fancy_output(data)
 

@@ -35,8 +35,8 @@ def convert_temperature_to_feels_like(weather_data: WeatherIndicators) -> float:
     return round(feels_like, 2)
 
 
-def calculate_vapor_pressure(weather_data):
-    vapor_pressure = (
+def calculate_vapor_pressure(weather_data: WeatherIndicators) -> float:
+    return (
         (weather_data.humidity_percent / HUMIDITY_PERCENT_DIVISOR)
         * VAPOR_PRESSURE_BASE
         * (
@@ -47,4 +47,3 @@ def calculate_vapor_pressure(weather_data):
             )
         )
     )
-    return vapor_pressure

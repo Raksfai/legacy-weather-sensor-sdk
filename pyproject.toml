@@ -22,3 +22,24 @@ dev = [
     "ruff>=0.16.8",
     "ty>=0.0.81",
 ]
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle
+    "F",      # Pyflakes
+    "UP",     # pyupgrade
+    "B",      # flake8-bugbear
+    "SIM",    # flake8-simplify
+    "I",      # isort
+    "C4",     # flake8-comprehensions
+    "RET",    # flake8-return
+    "RUF",    # Ruff-specific rules
+    "N",      # pep8-naming
+    "PT",     # flake8-pytest-style
+    "S",      # flake8-bandit
+    "ANN",    # flake8-annotations
+]
+
+[tool.ruff.lint.per-file-ignores]
+"test/**/*.py" = ["S101"]
+"sensor.py" = ["S311"]
