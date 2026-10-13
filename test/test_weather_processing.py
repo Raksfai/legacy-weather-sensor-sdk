@@ -11,6 +11,7 @@ from data_normalization import (
 )
 from fancy_output import make_fancy_output
 from weather_indicators import WeatherIndicators
+from weather_processing import classify_wind_speed
 
 
 def test_normalize_raw_data_from_string() -> None:
@@ -87,3 +88,36 @@ def test_make_fancy_output() -> None:
     )
 
     assert output == expected_output
+
+
+def test_classify_wind_speed_light_breeze() -> None:
+    assert classify_wind_speed(5.2) == "Gentle breeze"
+
+
+@pytest.mark.parametrize(
+    ("wind_speed_mps", "expected"),
+    [
+        (0.2, "Calm"),
+        (0.3, "Light air"),
+        (1.5, "Light air"),
+        (1.6, "Light breeze"),
+        (3.3, "Light breeze"),
+        (3.4, "Gentle breeze"),
+        (5.4, "Gentle breeze"),
+        (5.5, "Moderate breeze"),
+        (7.9, "Moderate breeze"),
+        (8.0, "Fresh breeze"),
+        (10.7, "Fresh breeze"),
+        (10.8, "Strong wind (warning)"),
+        (25.0, "Strong wind (warning)"),
+    ],
+)
+def test_classify_wind_speed_boundaries(
+    wind_speed_mps: float, expected: str
+) -> None:
+    assert classify_wind_speed(wind_speed_mps) == expected
+
+
+def test_classify_wind_speed_rejects_negative_speed() -> None:
+    with pytest.raises(ValueError, match="wind speed cannot be negative"):
+        classify_wind_speed(-0.1)
